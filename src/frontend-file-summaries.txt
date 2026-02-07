@@ -1,0 +1,23 @@
+{
+  "frontend/src/index.css": "Global styles with romantic pink/blush/rose-gold OKLCH color palette, custom animations for floating hearts/petals/sparkles, 3D flip card effects, and elegant typography using Georgia/Playfair Display serif fonts.",
+  "frontend/src/App.tsx": "Main application component managing passcode gate (strictly minimal when locked), entry modal, hero section, image/video galleries, surprise section, background music player, and romantic animations with session-based unlock state.",
+  "frontend/src/components/gate/PasscodeGate.tsx": "Minimal numeric keypad passcode lock screen requiring code \"182004032007\" with error feedback and shake animation, with all decorative emojis removed for a strictly minimal locked experience.",
+  "frontend/src/components/modals/EntryModal.tsx": "Entry popup modal displaying \"Enter Our World 🌍 💕 Of Our Happiness\" with a button labeled \"Kuttu 🧿 🎀 🐶\" that proceeds to the hero section.",
+  "frontend/src/components/modals/RomanticMessageModal.tsx": "Birthday message popup with floating hearts and sparkles displaying the special 20th birthday message with romantic animations.",
+  "frontend/src/components/modals/LoveLetterModal.tsx": "Scrollable love letter modal displaying the long heartfelt message with romantic styling and gradient background.",
+  "frontend/src/components/ambient/RomanticBackground.tsx": "Fixed background layer rendering floating hearts, rose petals, and sparkles with staggered animations for ambient romantic atmosphere.",
+  "frontend/src/components/ornaments/BlinkingEmojiSequence.tsx": "Top banner displaying emoji sequence (🐶🧿🎀👸🏻🫂👑😘🍻🌍) with one-by-one blinking animation that loops continuously.",
+  "frontend/src/components/media/BackgroundMusicPlayer.tsx": "Bottom-right audio player with play/pause and mute controls, featuring smooth 2-second fade-in from near-silent to target volume on initial play, user play action, and each loop restart, with proper cleanup and mute state preservation.",
+  "frontend/src/sections/HeroSection.tsx": "Full-screen hero section with hero-bg.jpg background, translucent pink overlay card containing birthday headline, multiline name list, subtext messages, and CTA button.",
+  "frontend/src/sections/ImageMemorySection.tsx": "Image gallery section displaying 43 flip cards in a responsive grid with header and description, without any edit mode toggle or save controls.",
+  "frontend/src/sections/VideoMemorySection.tsx": "Video gallery grid with edit mode toggle (Switch + Label) that allows users to replace each video tile from device file picker (accept=\"video/*\"), with local browser persistence via useLocalMedia hook.",
+  "frontend/src/sections/SurpriseSection.tsx": "Surprise section with love letter modal trigger and closing message \"I'm Forever Your's, Always Your's and Endlessly Yours\" with animated emojis.",
+  "frontend/src/components/gallery/FlipImageCard.tsx": "Interactive 3D flip card component with tap-to-flip animation and always-visible per-card Add/Replace Image button that persists changes via IndexedDB, with button interaction isolated from flip behavior.",
+  "frontend/src/content/mediaPlaceholders.ts": "Configuration file defining all media placeholder paths (43 images, 6 videos) with clear developer instructions for replacing local assets.",
+  "frontend/src/content/romanticMessages.ts": "Array of 43 romantic messages (user-provided verbatim) displayed on the back side of flipped image cards.",
+  "frontend/tailwind.config.js": "Extended Tailwind configuration with romantic color tokens, custom shadows, serif font family, and romantic-themed design system utilities.",
+  "frontend/src/hooks/useQueries.ts": "Minimal queries hook file (no backend methods needed for this static client-side romantic website).",
+  "frontend/src/lib/localMediaStore.ts": "Client-side IndexedDB wrapper for persisting user-selected media (video blobs) with stable keys per tile, exposing save/get/remove capabilities.",
+  "frontend/src/hooks/useLocalMedia.ts": "React hook that loads/saves per-tile media replacements (images and videos) via IndexedDB and produces object URLs for immediate preview, with automatic cleanup to prevent memory leaks and a new hasLocalOverride flag to distinguish Add vs Replace UI states.",
+  "frontend/src/hooks/useObjectPositionDrag.ts": "React hook that encapsulates pointer-based dragging logic (supporting both mouse and touch uniformly) to compute and clamp object-position percentages, with automatic pointer capture and touch-action management to prevent page scroll conflicts during active drags, now with proper nullable ref type support."
+}

@@ -1,0 +1,50 @@
+{
+  "kind": "build_request",
+  "title": "Add fade-in effect on looping background music",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-24",
+      "text": "Update the background music player so the background audio fades in smoothly each time playback starts, including when the track restarts as part of looping.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-5"
+        ],
+        "quotes": [
+          "Just with fading in loop"
+        ]
+      },
+      "acceptanceCriteria": [
+        "When the background music begins playing (autoplay start or after pressing Play), its volume ramps up from near-silent to the intended listening volume over a short, smooth fade-in.",
+        "When the track reaches the end and restarts (loop), the restart is not abrupt; the audio fades in again on the new loop iteration.",
+        "The fade-in must not change the user’s mute state: if the user is muted, the player remains muted and no audible sound is produced.",
+        "Play/Pause and Mute/Unmute controls continue to work as they do now, with no UI regressions.",
+        "No backend changes are required."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not edit files under frontend/src/components/ui (compose existing UI components only).",
+    "Do not change the passcode gate behavior or any locked-screen minimal UI behavior as part of this change."
+  ],
+  "nonGoals": [
+    "Adding fade-out behavior (only fade-in is required).",
+    "Changing which audio file is used (continue using the existing local /background.mp3 source).",
+    "Adding new pages, sections, or backend persistence for audio settings."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

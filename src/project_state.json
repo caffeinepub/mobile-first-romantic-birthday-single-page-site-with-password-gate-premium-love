@@ -1,0 +1,311 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 15,
+  "summary": "Mobile-first romantic birthday website (pure HTML/CSS/JS) with premium love theme: password gate, hero with popup entry, autoplay looping background audio with controls, animated emojis/hearts/petals, image/video memory galleries with editable placeholders and interactive flip/rotate surprise messages, plus a surprise love-letter popup section.",
+  "architectural_notes": [
+    "Use pure HTML/CSS/JavaScript (no frameworks); mobile-first responsive layout.",
+    "All media must be local placeholders (hero-bg.jpg, image1.jpg…, video1.mp4…, song.mp3) with clear HTML comments for easy replacement; no external images/videos.",
+    "Design image/video blocks so users can duplicate entries to add unlimited media without breaking animations.",
+    "Lock screen should not display floating emojis/animated floating elements; keep it clean/minimal until unlock.",
+    "Lock screen should not show the blinking emoji sequence (🐶🧿🎀👸🏻🫂👑😘🍻🌍); keep lock screen minimal and move/limit decorative emoji animations to post-unlock areas only.",
+    "Improve Image Memory edit mode UX so adding/replacing images is straightforward for each card (including image2) and does not require complex steps.",
+    "Image Memory section: provide per-card controls in the grid for Add/Replace and drag-to-adjust positioning (not just a global/hidden edit flow), so every image tile can be updated and repositioned directly.",
+    "Per-card Add/Replace controls are required only for Image Memory tiles; do not implement equivalent per-card Add/Replace controls for the Video Memory section unless explicitly requested later.",
+    "Background audio: implement a subtle fade-in at loop restart (and/or initial play) for smoother looping."
+  ],
+  "known_issues": [
+    "Lock screen currently displays the emoji sequence (🐶🧿🎀👸🏻🫂👑😘🍻🌍) and needs to be replaced/removed per requirements.",
+    "User reports trouble adding/replacing image #2 in the Image Memory section; image add/replace flow may be broken or unclear for that card."
+  ],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-create-a-mobile-first-single-page-experience-with-a-premium-romantic-love-theme-using-a-soft-pink-blush-rose-gold-palette-elegant-typography-and-smooth-lightweight-animations-floating-hearts-and-subtle-rose-petal-motion",
+      "title": "Create a mobile-first single-page experience with a premium romantic love theme using a soft pink/blush/rose-gold palette, elegant typography, and smooth, lightweight animations (floating hearts and subtle rose-petal motion).",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-numeric-passcode-lock-screen-that-gates-access-to-the-rest-of-the-site-the-user-must-enter-the-passcode-182004032007-to-proceed",
+      "title": "Implement a numeric passcode lock screen that gates access to the rest of the site. The user must enter the passcode \"182004032007\" to proceed.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-entry-popup-after-unlocking-that-displays-the-text-enter-our-world-of-our-happiness-with-a-button-labeled-kuttu-that-proceeds-to-the-hero-section",
+      "title": "Add an entry popup after unlocking that displays the text \"Enter Our World 🌍 💕 Of Our Happiness\" with a button labeled \"Kuttu 🧿 🎀 🐶\" that proceeds to the hero section.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-hero-section-with-a-full-screen-custom-background-image-placeholder-using-a-local-asset-filename-hero-bg-jpg-add-a-light-pinkish-translucent-overlay-popup-containing-the-provided-bold-headline-and-the-provided-multiline-name-list-plus-the-provided-subtext-lines-inside-a-boxed-layout",
+      "title": "Create a hero section with a full-screen custom background image placeholder using a local asset filename \"hero-bg.jpg\". Add a light pinkish translucent overlay/popup containing the provided bold headline and the provided multiline name list, plus the provided subtext lines inside a boxed layout.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-continuous-one-by-one-blinking-emoji-sequence-using-these-emojis-in-order-the-sequence-should-loop-and-match-the-premium-romantic-aesthetic-not-flashy",
+      "title": "Add a continuous, one-by-one blinking emoji sequence using these emojis in order: 🐶 🧿 🎀 👸🏻 🫂 👑 😘 🍻 🌍. The sequence should loop and match the premium romantic aesthetic (not flashy).",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-romantic-popup-message-box-containing-as-uh-are-completing-ur-19teen-age-u-r-entering-in-20s-so-by-this-birthday-u-r-20s-so-wishing-you-a-lovely-birthday-to-my-life-partner-with-floating-heart-and-sparkle-animations-around-behind-it",
+      "title": "Implement a romantic popup message box containing: \"As Uh Are Completing Ur 19teen Age & U R Entering in 20s , So By This Birthday U R 20s so, Wishing You A Lovely Birthday To My Life Partner 🥰 🫂 🫀 🎀 🧿 👸🏻\" with floating heart and sparkle animations around/behind it.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-background-music-playback-using-a-local-mp3-placeholder-file-e-g-background-mp3-that-attempts-to-autoplay-muted-on-page-load-loops-continuously-and-provides-a-lightweight-subtle-player-ui-with-play-pause-control-fixed-at-the-bottom-right-corner-the-audio-element-player-should-be-lightly-visible",
+      "title": "Add background music playback using a local MP3 placeholder file (e.g., \"background.mp3\") that attempts to autoplay muted on page load, loops continuously, and provides a lightweight, subtle player UI with play/pause control fixed at the bottom-right corner. The audio element/player should be lightly visible.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-an-image-memory-section-with-a-responsive-grid-of-43-image-cards-by-default-using-local-placeholder-filenames-image1-jpg-image43-jpg-the-gallery-must-be-extensible-to-unlimited-images-by-duplicating-or-extending-a-simple-configuration-list-without-changing-any-animation-logic",
+      "title": "Create an Image Memory section with a responsive grid of 43 image cards by default, using local placeholder filenames (image1.jpg ... image43.jpg). The gallery must be extensible to unlimited images by duplicating or extending a simple configuration list, without changing any animation logic.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-make-each-image-card-clickable-tappable-to-perform-a-smooth-3d-rotate-flip-fade-transition-revealing-a-back-side-with-a-romantic-surprise-message-use-soft-shadows-and-rounded-corners-and-keep-the-effect-elegant-no-heavy-effects",
+      "title": "Make each image card clickable/tappable to perform a smooth 3D rotate (flip) + fade transition revealing a back side with a romantic surprise message. Use soft shadows and rounded corners, and keep the effect elegant (no heavy effects).",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-provide-a-built-in-set-of-romantic-message-strings-including-the-examples-provided-by-the-user-and-ensure-each-image-card-back-side-displays-one-message-e-g-mapped-by-index-or-randomly-with-stable-behavior-per-card",
+      "title": "Provide a built-in set of romantic message strings including the examples provided by the user, and ensure each image card back side displays one message (e.g., mapped by index or randomly with stable behavior per card).",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-optional-working-edit-mode-for-the-image-memory-section-that-includes-1-an-add-replace-control-per-card-2-a-drag-to-adjust-feature-to-reposition-the-image-within-its-frame-e-g-via-object-position-and-3-a-save-action-that-persists-the-adjustment-settings-locally-in-the-browser-so-they-remain-after-refresh",
+      "title": "Add an optional “working/edit mode” for the Image Memory section that includes: (1) an Add/Replace control per card, (2) a drag-to-adjust feature to reposition the image within its frame (e.g., via object-position), and (3) a Save action that persists the adjustment settings locally in the browser so they remain after refresh.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-video-memory-section-displaying-a-responsive-grid-of-6-videos-by-default-using-local-placeholder-filenames-video1-mp4-video6-mp4-videos-must-preserve-their-aspect-ratio-have-rounded-corners-be-muted-by-default-and-loop-smoothly-without-playing-audio-background-music-remains-separate",
+      "title": "Create a Video Memory section displaying a responsive grid of 6 videos by default using local placeholder filenames (video1.mp4 ... video6.mp4). Videos must preserve their aspect ratio, have rounded corners, be muted by default, and loop smoothly without playing audio (background music remains separate).",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-surprise-section-that-includes-1-a-cover-love-letter-popup-modal-containing-the-provided-long-love-letter-text-and-2-a-birthday-wish-area-with-the-closing-line-i-m-forever-your-s-always-your-s-and-endlessly-yours",
+      "title": "Add a Surprise section that includes: (1) a “cover love letter” popup/modal containing the provided long love-letter text, and (2) a birthday wish area with the closing line: \"I'm Forever Your's, Always  Your's and Endlessly Yours 💯 🫂 🧿 🥺 🐶 🙇🏻 ❤️\".",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-provide-a-simple-clearly-documented-local-media-placeholder-structure-using-only-local-static-assets-no-external-images-videos-audio-include-developer-facing-comments-near-media-declarations-indicating-which-filenames-to-replace-hero-background-hero-bg-jpg-images-image1-jpg-image2-jpg-videos-video1-mp4-and-background-audio-background-mp3",
+      "title": "Provide a simple, clearly documented local media placeholder structure using only local/static assets (no external images/videos/audio). Include developer-facing comments near media declarations indicating which filenames to replace: hero background (hero-bg.jpg), images (image1.jpg, image2.jpg, ...), videos (video1.mp4, ...), and background audio (background.mp3).",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-remove-any-floating-animated-emoji-decorations-from-the-passcode-lock-screen-ui-and-keep-the-lock-screen-strictly-minimal-static-while-preserving-the-existing-passcode-functionality-12-digit-code-182004032007",
+      "title": "Remove any floating/animated emoji decorations from the passcode lock screen UI and keep the lock screen strictly minimal (static) while preserving the existing passcode functionality (12-digit code: 182004032007).",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-in-browser-replace-from-phone-gallery-capability-for-the-video-memory-section-matching-the-existing-image-memory-edit-mode-behavior-provide-a-clear-edit-mode-toggle-for-videos-and-allow-the-user-to-add-replace-each-video-using-the-device-file-picker-video-with-selections-previewed-immediately-and-persisted-locally-in-the-browser-so-they-remain-after-refresh",
+      "title": "Add an in-browser “replace from phone gallery” capability for the Video Memory section, matching the existing Image Memory edit-mode behavior: provide a clear edit mode toggle for videos and allow the user to add/replace each video using the device file picker (video/*), with selections previewed immediately and persisted locally in the browser so they remain after refresh.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-passcode-lock-screen-is-strictly-minimal-and-does-not-show-the-blinking-emoji-sequence-or-any-other-decorative-animated-emoji-elements-while-locked",
+      "title": "Ensure the passcode lock screen is strictly minimal and does not show the blinking emoji sequence (🐶 🧿 🎀 👸🏻 🫂 👑 😘 🍻 🌍) or any other decorative/animated emoji elements while locked.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-make-adding-replacing-images-in-the-image-memory-section-easier-and-more-reliable-by-fixing-the-per-card-replace-flow-so-that-replacing-image-2-works-consistently-persist-replaced-images-using-the-same-indexeddb-based-local-media-storage-approach-used-for-videos-instead-of-storing-large-base64-strings-in-localstorage",
+      "title": "Make adding/replacing images in the Image Memory section easier and more reliable by fixing the per-card replace flow so that replacing image #2 works consistently; persist replaced images using the same IndexedDB-based local media storage approach used for videos (instead of storing large base64 strings in localStorage).",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-image-memory-section-so-that-every-image-tile-in-the-grid-provides-per-card-media-editing-controls-each-card-must-allow-the-user-to-add-replace-its-image-from-the-device-file-picker-image-and-immediately-preview-the-selected-image-in-that-same-card",
+      "title": "Update the Image Memory section so that every image tile in the grid provides per-card media editing controls: each card must allow the user to Add/Replace its image from the device file picker (image/*) and immediately preview the selected image in that same card.",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-image-memory-grid-so-that-every-image-tile-supports-per-card-drag-to-adjust-positioning-within-its-frame-while-in-edit-mode-including-touch-dragging-on-mobile-dragging-must-not-trigger-the-flip-interaction-while-editing",
+      "title": "Update the Image Memory grid so that every image tile supports per-card drag-to-adjust positioning within its frame while in Edit Mode, including touch dragging on mobile. Dragging must not trigger the flip interaction while editing.",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-image-memory-section-so-that-each-image-tile-always-shows-an-add-image-replace-image-button-based-on-whether-that-tile-has-a-local-override-and-remove-the-image-memory-edit-mode-toggle-ui-save-changes-button-and-edit-mode-instructions-from-the-section",
+      "title": "Update the Image Memory section so that each image tile always shows an \"Add Image\" / \"Replace Image\" button (based on whether that tile has a local override), and remove the Image Memory \"Edit Mode\" toggle UI, Save Changes button, and edit-mode instructions from the section.",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-flipimagecard-so-that-the-only-per-card-editing-control-is-the-add-replace-image-button-no-drag-to-adjust-ui-behavior-tied-to-an-edit-mode-while-preserving-1-tap-to-flip-interaction-for-the-card-2-immediate-preview-of-the-selected-image-in-the-same-card-and-3-persistence-of-replaced-images-using-the-existing-indexeddb-local-media-storage-mechanism",
+      "title": "Update the FlipImageCard so that the only per-card editing control is the Add/Replace Image button (no drag-to-adjust UI/behavior tied to an edit mode), while preserving: (1) tap-to-flip interaction for the card, (2) immediate preview of the selected image in the same card, and (3) persistence of replaced images using the existing IndexedDB/local media storage mechanism.",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-background-music-player-so-the-background-audio-fades-in-smoothly-each-time-playback-starts-including-when-the-track-restarts-as-part-of-looping",
+      "title": "Update the background music player so the background audio fades in smoothly each time playback starts, including when the track restarts as part of looping.",
+      "reqIds": [
+        "REQ-24"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Mobile-first single-page romantic birthday site with soft pink/blush/rose-gold premium love theme, elegant fonts, smooth animations, floating hearts/rose petals and blinking emojis sequence 🐶🧿🎀👸🏻🫂👑😘🍻🌍",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Password/number-lock gate with code 182004032007 to enter the site",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Entry experience: 'Enter Our World 🌍 💕 Of Our Happiness' popup with button labeled 'Kuttu 🧿 🎀 🐶'",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Hero section with full-screen custom background image placeholder (hero-bg.jpg), pinkish overlay/popup text including provided birthday headline, name list, and subtexts in a boxed layout",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Popup message box with specified birthday message and floating heart/sparkle animations",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Background music: autoplay silently on load, looping MP3, mobile-compatible, light/visible audio UI with play/pause button bottom-right, no user interaction required",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Image Memory section: responsive grid defaulting to 43 images (expandable/unlimited) using local placeholders (image1.jpg, image2.jpg, …); each card clickable with smooth 3D rotate + fade to reveal romantic surprise message; soft shadows/rounded corners",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Working mode controls for images: add/replace button, drag-to-adjust positioning, and save button",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Video Memory section: grid for 6 videos (expandable) using local placeholders (video1.mp4, …), kept at original ratio; muted by default, looping, rounded corners, no autoplay sound",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Surprise section: cover love-letter text shown via opening love popup plus closing line 'I'm Forever Your's, Always Your's and Endlessly Yours…'",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Media handling rules: no external hardcoded images/videos; clear HTML comments and simple source swapping for background image, unlimited images, videos, and MP3; animations remain stable when media is replaced",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Allow user to add/replace images and videos directly from phone gallery (via file picker permissions) for the media sections",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "Image Memory section only: add an Add/Replace button/control in each image card/tile (per-image). Do not extend this per-card add/replace control behavior to the Video Memory section.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-14",
+      "summary": "Update background music to use the user-provided MP3 file as the looping background audio track (replace the placeholder MP3 source)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-15",
+      "summary": "Add the user-provided MP3 file to the frontend static assets and make it the track used by the background music player, looping continuously.",
+      "reqIds": [
+        "REQ-23"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-16",
+      "summary": "Background music: add a fade-in effect when the looping track starts/restarts (fade-in on loop)",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Mobile-first romantic birthday single-page site with password gate, premium love theme, media galleries, and music",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

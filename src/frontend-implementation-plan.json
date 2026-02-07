@@ -1,0 +1,25 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Fade-in on looping background music playback",
+  "requirements": [
+    {
+      "id": "REQ-24",
+      "summary": "Add a smooth fade-in volume ramp each time background music playback starts, including on each loop restart, while preserving mute and existing controls.",
+      "acceptanceCriteria": [
+        "When the background music begins playing (autoplay start or after pressing Play), its volume ramps up from near-silent to the intended listening volume over a short, smooth fade-in.",
+        "When the track reaches the end and restarts (loop), the restart is not abrupt; the audio fades in again on the new loop iteration.",
+        "The fade-in must not change the user’s mute state: if the user is muted, the player remains muted and no audible sound is produced.",
+        "Play/Pause and Mute/Unmute controls continue to work as they do now, with no UI regressions.",
+        "No backend changes are required."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/media/BackgroundMusicPlayer.tsx",
+          "operation": "modify",
+          "description": "Implement a fade-in behavior by ramping audio volume from near-silent to a target volume whenever playback starts (autoplay or user Play) and whenever the track restarts as part of looping (e.g., handle the natural loop restart or implement a controlled restart on track completion). Ensure the fade-in is skipped when muted and does not toggle or alter the user’s mute state. Preserve current Play/Pause and Mute/Unmute behavior and UI, and do not modify any files under frontend/src/components/ui or change passcode-gate/locked-screen behavior."
+        }
+      ]
+    }
+  ]
+}
