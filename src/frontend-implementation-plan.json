@@ -1,23 +1,63 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Fade-in on looping background music playback",
+  "title": "Fix local background music asset path and harden BackgroundMusicPlayer for production builds",
   "requirements": [
     {
-      "id": "REQ-24",
-      "summary": "Add a smooth fade-in volume ramp each time background music playback starts, including on each loop restart, while preserving mute and existing controls.",
+      "id": "REQ-29",
+      "summary": "Add a valid local MP3 at frontend/public/background.mp3 and ensure the player loads it via the root-relative /background.mp3 path.",
       "acceptanceCriteria": [
-        "When the background music begins playing (autoplay start or after pressing Play), its volume ramps up from near-silent to the intended listening volume over a short, smooth fade-in.",
-        "When the track reaches the end and restarts (loop), the restart is not abrupt; the audio fades in again on the new loop iteration.",
-        "The fade-in must not change the user’s mute state: if the user is muted, the player remains muted and no audible sound is produced.",
-        "Play/Pause and Mute/Unmute controls continue to work as they do now, with no UI regressions.",
-        "No backend changes are required."
+        "A file exists at frontend/public/background.mp3 in the repo.",
+        "The <source> in BackgroundMusicPlayer uses src=\"/background.mp3\" (root-relative) and does not reference any missing or external URLs.",
+        "A production build can fetch /background.mp3 successfully (no 404)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/background.mp3",
+          "operation": "create",
+          "description": "Add a valid MP3 audio asset to this exact location so it is served in production as /background.mp3 (use the provided local MP3 asset as the source when committing)."
+        },
+        {
+          "path": "frontend/src/components/media/BackgroundMusicPlayer.tsx",
+          "operation": "modify",
+          "description": "Confirm the audio <source> remains root-relative and points exactly to src=\"/background.mp3\" (no external URLs, no missing paths). Keep using the shadcn-ui Button component for the controls; verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-30",
+      "summary": "Resolve build/runtime issues for background music playback so production builds and deployed app run without errors even when autoplay is blocked.",
+      "acceptanceCriteria": [
+        "The project builds successfully without errors.",
+        "The deployed app loads without runtime errors.",
+        "BackgroundMusicPlayer renders and the app remains functional even if autoplay is blocked by the browser."
       ],
       "file_operations": [
         {
           "path": "frontend/src/components/media/BackgroundMusicPlayer.tsx",
           "operation": "modify",
-          "description": "Implement a fade-in behavior by ramping audio volume from near-silent to a target volume whenever playback starts (autoplay or user Play) and whenever the track restarts as part of looping (e.g., handle the natural loop restart or implement a controlled restart on track completion). Ensure the fade-in is skipped when muted and does not toggle or alter the user’s mute state. Preserve current Play/Pause and Mute/Unmute behavior and UI, and do not modify any files under frontend/src/components/ui or change passcode-gate/locked-screen behavior."
+          "description": "Harden playback logic to avoid build/runtime failures: ensure all audio.play() calls are properly handled (no unhandled promise rejections), add safe guards when the audio element is not ready, and keep UI responsive regardless of autoplay policy. Continue using the shadcn-ui Button component for controls; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Verify BackgroundMusicPlayer remains rendered in the unlocked experience and that any added player UI/status messaging does not interfere with navigation and existing sections (hero, galleries, surprise modal)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-31",
+      "summary": "Show an English helper message near the music controls when audio fails to load or cannot start (e.g., autoplay blocked), without breaking the rest of the app.",
+      "acceptanceCriteria": [
+        "When audio playback cannot start (e.g., autoplay blocked or file missing), the UI shows an English helper message near the controls (e.g., “Tap Play to start music”).",
+        "No unhandled promise rejections are emitted from audio.play().",
+        "The page remains navigable and all sections (hero, galleries, surprise modal) still work normally."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/media/BackgroundMusicPlayer.tsx",
+          "operation": "modify",
+          "description": "Add subtle, English helper text near the play/mute controls that appears when playback fails to start or the audio resource errors (e.g., “Tap Play to start music”). Track and update state based on play() rejections and audio error events; ensure all play attempts are caught/handled. Keep using the shadcn-ui Button component for controls; verify the component's usage instructions before implementing."
         }
       ]
     }

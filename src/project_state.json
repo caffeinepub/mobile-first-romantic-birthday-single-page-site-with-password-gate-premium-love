@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 15,
+  "projectStateVersion": 21,
   "summary": "Mobile-first romantic birthday website (pure HTML/CSS/JS) with premium love theme: password gate, hero with popup entry, autoplay looping background audio with controls, animated emojis/hearts/petals, image/video memory galleries with editable placeholders and interactive flip/rotate surprise messages, plus a surprise love-letter popup section.",
   "architectural_notes": [
     "Use pure HTML/CSS/JavaScript (no frameworks); mobile-first responsive layout.",
@@ -15,9 +15,10 @@
   ],
   "known_issues": [
     "Lock screen currently displays the emoji sequence (🐶🧿🎀👸🏻🫂👑😘🍻🌍) and needs to be replaced/removed per requirements.",
-    "User reports trouble adding/replacing image #2 in the Image Memory section; image add/replace flow may be broken or unclear for that card."
+    "User reports trouble adding/replacing image #2 in the Image Memory section; image add/replace flow may be broken or unclear for that card.",
+    "Build/app generation failed when attempting to add/enable background song playback; needs rerun/repair."
   ],
-  "isFixRequest": false,
+  "isFixRequest": true,
   "existing_features": [
     {
       "id": "feature-create-a-mobile-first-single-page-experience-with-a-premium-romantic-love-theme-using-a-soft-pink-blush-rose-gold-palette-elegant-typography-and-smooth-lightweight-animations-floating-hearts-and-subtle-rose-petal-motion",
@@ -200,6 +201,62 @@
       "title": "Update the background music player so the background audio fades in smoothly each time playback starts, including when the track restarts as part of looping.",
       "reqIds": [
         "REQ-24"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-local-mp3-file-named-background-mp3-under-the-frontend-public-static-assets-and-ensure-the-existing-backgroundmusicplayer-uses-it-for-background-playback-autoplay-best-effort-looping-with-the-current-fade-in-behavior-and-play-pause-mute-controls",
+      "title": "Add a local MP3 file named \"background.mp3\" under the frontend public static assets and ensure the existing BackgroundMusicPlayer uses it for background playback (autoplay best-effort, looping, with the current fade-in behavior and play/pause + mute controls).",
+      "reqIds": [
+        "REQ-25"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-project-includes-a-valid-local-mp3-file-at-frontend-public-background-mp3-and-that-the-backgroundmusicplayer-plays-that-exact-file-path-background-mp3-in-production-builds",
+      "title": "Ensure the project includes a valid local MP3 file at frontend/public/background.mp3 and that the BackgroundMusicPlayer plays that exact file path (\"/background.mp3\") in production builds.",
+      "reqIds": [
+        "REQ-26"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-harden-the-backgroundmusicplayer-against-load-play-failures-so-the-ui-behaves-predictably-if-audio-cannot-be-loaded-or-playback-fails-keep-the-app-functional-and-show-a-subtle-english-helper-message-near-the-controls-indicating-the-user-may-need-to-press-play",
+      "title": "Harden the BackgroundMusicPlayer against load/play failures so the UI behaves predictably: if audio cannot be loaded or playback fails, keep the app functional and show a subtle English helper message near the controls indicating the user may need to press Play.",
+      "reqIds": [
+        "REQ-27"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-resolve-the-previous-app-generation-build-failure-for-the-background-song-update-by-ensuring-the-app-builds-and-deploys-successfully-with-the-background-music-feature-enabled",
+      "title": "Resolve the previous app generation/build failure for the background-song update by ensuring the app builds and deploys successfully with the background music feature enabled.",
+      "reqIds": [
+        "REQ-28"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-valid-local-mp3-audio-file-at-frontend-public-background-mp3-and-ensure-the-background-music-player-loads-that-exact-path-background-mp3-in-production-builds",
+      "title": "Add a valid local MP3 audio file at frontend/public/background.mp3 and ensure the background music player loads that exact path (\"/background.mp3\") in production builds.",
+      "reqIds": [
+        "REQ-29"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-resolve-the-app-generation-build-failure-related-to-enabling-background-song-playback-so-the-project-builds-and-deploys-successfully-with-the-background-music-feature-enabled",
+      "title": "Resolve the app generation/build failure related to enabling background song playback so the project builds and deploys successfully with the background music feature enabled.",
+      "reqIds": [
+        "REQ-30"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-if-background-audio-fails-to-load-or-play-show-a-subtle-english-helper-message-near-the-music-controls-indicating-that-the-user-may-need-to-press-play-while-keeping-the-rest-of-the-app-fully-usable",
+      "title": "If background audio fails to load or play, show a subtle English helper message near the music controls indicating that the user may need to press Play, while keeping the rest of the app fully usable.",
+      "reqIds": [
+        "REQ-31"
       ],
       "version": 1
     }

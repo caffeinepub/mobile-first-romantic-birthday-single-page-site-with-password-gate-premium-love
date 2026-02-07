@@ -6,6 +6,8 @@ export default function BackgroundMusicPlayer() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
+  const [hasError, setHasError] = useState(false);
+  const [showHelper, setShowHelper] = useState(false);
   const fadeIntervalRef = useRef<number | null>(null);
   
   // Target volume for fade-in (0.0 to 1.0)
@@ -59,15 +61,30 @@ export default function BackgroundMusicPlayer() {
       // When track ends naturally, restart with fade-in
       audio.currentTime = 0;
       fadeIn();
-      audio.play().catch(() => {
-        // Handle play error silently
+      audio.play().catch((err) => {
+        console.warn('Loop playback failed:', err);
+        setIsPlaying(false);
       });
     };
 
+    const handleError = () => {
+      setHasError(true);
+      setShowHelper(true);
+      setIsPlaying(false);
+    };
+
+    const handleCanPlay = () => {
+      setHasError(false);
+    };
+
     audio.addEventListener('ended', handleEnded);
+    audio.addEventListener('error', handleError);
+    audio.addEventListener('canplay', handleCanPlay);
 
     return () => {
       audio.removeEventListener('ended', handleEnded);
+      audio.removeEventListener('error', handleError);
+      audio.removeEventListener('canplay', handleCanPlay);
       clearFadeInterval();
     };
   }, []);
@@ -80,10 +97,13 @@ export default function BackgroundMusicPlayer() {
       audio.volume = 0.01; // Start near-silent
       audio.play().then(() => {
         setIsPlaying(true);
+        setShowHelper(false);
         fadeIn(); // Fade in on autoplay
-      }).catch(() => {
+      }).catch((err) => {
         // Autoplay blocked, user will need to interact
+        console.info('Autoplay blocked:', err);
         setIsPlaying(false);
+        setShowHelper(true);
       });
     }
 
@@ -103,9 +123,12 @@ export default function BackgroundMusicPlayer() {
     } else {
       audio.play().then(() => {
         setIsPlaying(true);
+        setShowHelper(false);
         fadeIn(); // Fade in when user presses play
-      }).catch(() => {
-        // Handle play error
+      }).catch((err) => {
+        console.warn('Play failed:', err);
+        setIsPlaying(false);
+        setShowHelper(true);
       });
     }
   };
@@ -119,11 +142,18 @@ export default function BackgroundMusicPlayer() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
       {/* Audio element with loop disabled (we handle looping manually for fade-in) */}
-      <audio ref={audioRef}>
+      <audio ref={audioRef} preload="auto">
         <source src="/background.mp3" type="audio/mpeg" />
       </audio>
+
+      {/* Helper message when playback cannot start */}
+      {showHelper && !isPlaying && (
+        <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-romantic-pink/30 px-3 py-2 text-xs text-romantic-rose animate-in fade-in slide-in-from-bottom-2 duration-300">
+          {hasError ? 'Music unavailable' : 'Tap Play to start music'}
+        </div>
+      )}
 
       <div className="bg-white/90 backdrop-blur-sm rounded-full shadow-xl border-2 border-romantic-pink/50 p-2 flex gap-2">
         <Button
@@ -131,6 +161,7 @@ export default function BackgroundMusicPlayer() {
           variant="ghost"
           onClick={togglePlay}
           className="rounded-full hover:bg-romantic-blush"
+          aria-label={isPlaying ? 'Pause music' : 'Play music'}
         >
           {isPlaying ? (
             <Pause className="h-5 w-5 text-romantic-rose" />
@@ -144,6 +175,7 @@ export default function BackgroundMusicPlayer() {
           variant="ghost"
           onClick={toggleMute}
           className="rounded-full hover:bg-romantic-blush"
+          aria-label={isMuted ? 'Unmute music' : 'Mute music'}
         >
           {isMuted ? (
             <VolumeX className="h-5 w-5 text-romantic-rose" />

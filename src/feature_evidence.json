@@ -2,8 +2,8 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-update-the-background-music-player-so-the-background-audio-fades-in-smoothly-each-time-playback-starts-including-when-the-track-restarts-as-part-of-looping",
-      "featureTitle": "Update the background music player so the background audio fades in smoothly each time playback starts, including when the track restarts as part of looping.",
+      "featureId": "feature-add-a-valid-local-mp3-audio-file-at-frontend-public-background-mp3-and-ensure-the-background-music-player-loads-that-exact-path-background-mp3-in-production-builds",
+      "featureTitle": "Add a valid local MP3 audio file at frontend/public/background.mp3 and ensure the background music player loads that exact path (\"/background.mp3\") in production builds.",
       "files": [
         "frontend/src/components/media/BackgroundMusicPlayer.tsx"
       ],
@@ -15,7 +15,43 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-24"
+        "REQ-29"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-resolve-the-app-generation-build-failure-related-to-enabling-background-song-playback-so-the-project-builds-and-deploys-successfully-with-the-background-music-feature-enabled",
+      "featureTitle": "Resolve the app generation/build failure related to enabling background song playback so the project builds and deploys successfully with the background music feature enabled.",
+      "files": [
+        "frontend/src/components/media/BackgroundMusicPlayer.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-30"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-if-background-audio-fails-to-load-or-play-show-a-subtle-english-helper-message-near-the-music-controls-indicating-that-the-user-may-need-to-press-play-while-keeping-the-rest-of-the-app-fully-usable",
+      "featureTitle": "If background audio fails to load or play, show a subtle English helper message near the music controls indicating that the user may need to press Play, while keeping the rest of the app fully usable.",
+      "files": [
+        "frontend/src/components/media/BackgroundMusicPlayer.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-31"
       ],
       "confidence": "high"
     }

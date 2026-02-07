@@ -1,50 +1,76 @@
 {
   "kind": "build_request",
-  "title": "Add fade-in effect on looping background music",
-  "priority": "normal",
+  "title": "Fix background music asset and rerun build so the app deploys successfully",
+  "priority": "high",
   "requirements": [
     {
-      "id": "REQ-24",
-      "text": "Update the background music player so the background audio fades in smoothly each time playback starts, including when the track restarts as part of looping.",
+      "id": "REQ-29",
+      "text": "Add a valid local MP3 audio file at frontend/public/background.mp3 and ensure the background music player loads that exact path (\"/background.mp3\") in production builds.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-5"
+          "msg-9"
         ],
         "quotes": [
-          "Just with fading in loop"
+          "Yes"
         ]
       },
       "acceptanceCriteria": [
-        "When the background music begins playing (autoplay start or after pressing Play), its volume ramps up from near-silent to the intended listening volume over a short, smooth fade-in.",
-        "When the track reaches the end and restarts (loop), the restart is not abrupt; the audio fades in again on the new loop iteration.",
-        "The fade-in must not change the user’s mute state: if the user is muted, the player remains muted and no audible sound is produced.",
-        "Play/Pause and Mute/Unmute controls continue to work as they do now, with no UI regressions.",
-        "No backend changes are required."
+        "A file exists at frontend/public/background.mp3 in the repo.",
+        "The <source> in BackgroundMusicPlayer uses src=\"/background.mp3\" (root-relative) and does not reference any missing or external URLs.",
+        "A production build can fetch /background.mp3 successfully (no 404)."
+      ]
+    },
+    {
+      "id": "REQ-30",
+      "text": "Resolve the app generation/build failure related to enabling background song playback so the project builds and deploys successfully with the background music feature enabled.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-9"
+        ],
+        "quotes": [
+          "Yes"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The project builds successfully without errors.",
+        "The deployed app loads without runtime errors.",
+        "BackgroundMusicPlayer renders and the app remains functional even if autoplay is blocked by the browser."
+      ]
+    },
+    {
+      "id": "REQ-31",
+      "text": "If background audio fails to load or play, show a subtle English helper message near the music controls indicating that the user may need to press Play, while keeping the rest of the app fully usable.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-9"
+        ],
+        "quotes": [
+          "Yes"
+        ]
+      },
+      "acceptanceCriteria": [
+        "When audio playback cannot start (e.g., autoplay blocked or file missing), the UI shows an English helper message near the controls (e.g., “Tap Play to start music”).",
+        "No unhandled promise rejections are emitted from audio.play().",
+        "The page remains navigable and all sections (hero, galleries, surprise modal) still work normally."
       ]
     }
   ],
   "constraints": [
-    "Do not edit files under frontend/src/components/ui (compose existing UI components only).",
-    "Do not change the passcode gate behavior or any locked-screen minimal UI behavior as part of this change."
+    "Frontend immutable paths must not be edited: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui.",
+    "Backend must remain single-actor; only add migration.mo if an upgrade requires state migration.",
+    "Use only local/static assets for media (no external audio URLs).",
+    "Use English for any user-facing helper text added."
   ],
   "nonGoals": [
-    "Adding fade-out behavior (only fade-in is required).",
-    "Changing which audio file is used (continue using the existing local /background.mp3 source).",
-    "Adding new pages, sections, or backend persistence for audio settings."
+    "Changing the passcode gate behavior or passcode value.",
+    "Adding any backend storage or server-side media hosting for the audio file.",
+    "Adding third-party audio streaming or external CDNs."
   ],
   "imageRequirements": {
     "required": [],
     "edits": []
-  },
-  "userProfileUpdate": {
-    "goalsToAdd": [],
-    "goalsToRemove": [],
-    "preferencesToAdd": [],
-    "preferencesToRemove": [],
-    "miscToAdd": [],
-    "miscToRemove": [],
-    "fieldsToSet": {},
-    "fieldsToDelete": []
   }
 }

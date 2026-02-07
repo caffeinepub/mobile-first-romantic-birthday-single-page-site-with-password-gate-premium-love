@@ -1,27 +1,37 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-07T05:59:48.165Z",
-  "summary": "REQ-24 is largely implemented: the player now fades in volume on autoplay, on user-initiated Play, and on each loop restart via an `ended` handler. However, the diff shows the component forcing `audio.muted = true` on mount, which may violate the acceptance criterion that fade-in must not change the user’s mute state (depending on prior behavior/state).",
+  "generatedAt": "2026-02-07T07:04:21.271Z",
+  "summary": "The diff updates the BackgroundMusicPlayer logic (autoplay attempt with error handling, fade-in, loop restart handling, and helper-state flags), but it does not add the required local MP3 asset file, and the truncated diff does not provide evidence that the audio <source> uses the exact required root-relative path (/background.mp3) or that an English helper message is actually rendered near the controls.",
   "missing_requirements": [
     {
-      "id": "REQ-24",
-      "requirement": "The fade-in must not change the user’s mute state: if the user is muted, the player remains muted and no audible sound is produced.",
-      "reason": "The updated code explicitly forces the audio element to be muted on mount (`audio.muted = true`) and initializes React mute state to `true`, which can change the user’s mute/unmute state rather than preserving it.",
+      "id": "REQ-29",
+      "requirement": "Add a valid local MP3 audio file at frontend/public/background.mp3 and ensure the background music player loads that exact path (\"/background.mp3\") in production builds.",
+      "reason": "No new file was added under frontend/public/background.mp3 (diff shows no added files). The truncated component snippet does not show any <source> element or src attribute confirming \"/background.mp3\" is used.",
       "evidence": [
-        "frontend/src/components/media/BackgroundMusicPlayer.tsx"
+        "File diff summary: \"Added: 0\" / \"ADDED FILES: none\"",
+        "frontend/src/components/media/BackgroundMusicPlayer.tsx (truncated)"
       ]
-    }
-  ],
-  "hallucinated_features": [
+    },
     {
-      "description": "Manual looping implementation by disabling the audio element’s loop behavior and re-playing on the `ended` event.",
-      "reason": "REQ-24 asks for fade-in on loop restart but does not require changing loop mechanics; the diff introduces manual loop handling and comments that loop is disabled.",
+      "id": "REQ-30",
+      "requirement": "Resolve the app generation/build failure related to enabling background song playback so the project builds and deploys successfully with the background music feature enabled.",
+      "reason": "The diff summary provides no build/deploy evidence (e.g., CI/build config changes, build output, or fixes outside the component). While the player logic was modified, the required MP3 asset is still not present per the diff summary, which can still cause runtime/404 issues in production.",
       "evidence": [
-        "frontend/src/components/media/BackgroundMusicPlayer.tsx"
+        "File diff summary: \"Added: 0\" / \"ADDED FILES: none\"",
+        "frontend/src/components/media/BackgroundMusicPlayer.tsx (truncated)"
+      ]
+    },
+    {
+      "id": "REQ-31",
+      "requirement": "If background audio fails to load or play, show a subtle English helper message near the music controls indicating that the user may need to press Play, while keeping the rest of the app fully usable.",
+      "reason": "State flags (showHelper/hasError) are set on autoplay/play failures, but the return/JSX is truncated, so there is no direct evidence that an English helper message is rendered near the controls (nor what the exact text is).",
+      "evidence": [
+        "frontend/src/components/media/BackgroundMusicPlayer.tsx (truncated)"
       ]
     }
   ],
+  "hallucinated_features": [],
   "confidence": 0.62,
   "changed_files": [
     "frontend-file-summaries.txt",

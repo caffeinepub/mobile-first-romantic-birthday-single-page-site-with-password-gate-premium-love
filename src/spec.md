@@ -1,12 +1,12 @@
 # Specification
 
 ## Summary
-**Goal:** Add a smooth fade-in effect to the looping background music each time playback starts, without changing existing controls or locked-screen behavior.
+**Goal:** Fix background music asset/pathing and resolve build/runtime issues so the app deploys successfully with background music enabled.
 
 **Planned changes:**
-- Update the background music playback logic to ramp volume from near-silent to the intended level over a short fade-in whenever playback begins (autoplay or user-initiated).
-- Ensure the fade-in is applied again when the track restarts due to looping so the loop transition is not abrupt.
-- Preserve current Play/Pause and Mute/Unmute behavior, including ensuring fade-in does not produce sound when muted.
-- Limit changes to existing frontend code while avoiding edits to `frontend/src/components/ui` and avoiding any passcode/locked-screen behavior changes.
+- Add a valid local MP3 file at `frontend/public/background.mp3`.
+- Ensure `BackgroundMusicPlayer` references the root-relative path `src="/background.mp3"` (no missing or external URLs).
+- Update background music playback handling to avoid build/runtime errors, including handling autoplay-blocked scenarios without unhandled promise rejections.
+- Add a subtle English helper message near the music controls when audio can’t load or start (e.g., prompting the user to press Play), while keeping the rest of the app usable.
 
-**User-visible outcome:** Background music starts and restarts on loop with a gentle fade-in, while existing Play/Pause and Mute/Unmute controls behave the same as before.
+**User-visible outcome:** The deployed app loads without errors, background music controls work with the local `/background.mp3` file, and users see a small English prompt near the controls if they need to press Play to start music.
